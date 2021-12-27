@@ -30,7 +30,7 @@ function validateCard() {
 
 }
 
-async function genUserCreateButton(user , Scooter) {
+async function genUserCreateButton(user , Device) {
     let token = localStorage.getItem('token');
     let userData = await getUserByToken(token);
     let text = await userData.text();
@@ -46,7 +46,7 @@ async function genUserCreateButton(user , Scooter) {
             user:user,
             name: name,
             surname: surname,
-            scooter:Scooter
+            device:Device
         };
         await createUserRent(data, token);
 
@@ -75,7 +75,7 @@ async function getCertainCompUser(listProjectElement) {
     let text = await userData.text();
     let user = JSON.parse(text);
 
-    let comp = await userGetScooterByName(listProjectElement['name'], token);
+    let comp = await userGetDeviceByName(listProjectElement['name'], token);
 
     await genCard();
     await genCardCreate(user,comp);
@@ -151,11 +151,11 @@ async function genUserInfo() {
                     break;
                 }
                 case 2: {
-                    th.innerHTML = userRents[i]['scooter']['name'];
+                    th.innerHTML = userRents[i]['device']['name'];
                     break;
                 }
                 case 3: {
-                    th.innerHTML = userRents[i]['scooter']['expirationDate'];
+                    th.innerHTML = userRents[i]['device']['expirationDate'];
                     break;
                 }
                 case 4: {
@@ -169,7 +169,7 @@ async function genUserInfo() {
                         async function deleteComp(userRentElement) {
                             let token = localStorage.getItem('token');
                             console.log(userRentElement['userName']);
-                            await deleteScooterByNameU({name:userRentElement['userName']},token);
+                            await deleteDeviceByNameU({name:userRentElement['userName']},token);
                             await genUserInfo();
 
                         }

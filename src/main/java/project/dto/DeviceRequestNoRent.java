@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.Date;
 @Data
 @Getter
-public class ScooterRequestNoRent {
+public class DeviceRequestNoRent {
     private long id;
     private String name;
     private String description;

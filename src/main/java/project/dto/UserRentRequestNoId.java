@@ -1,6 +1,6 @@
 package project.dto;
 
-import project.models.Scooter;
+import project.models.Device;
 import project.models.User;
 import lombok.Data;
 import lombok.Getter;
@@ -20,5 +20,5 @@ public class UserRentRequestNoId {
     @Size(min = 4 , message = "surname from 4 ")
     private String surname;
     @NotNull
-    private Scooter scooter;
+    private Device device;
 }

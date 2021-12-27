@@ -49,8 +49,8 @@ async function getAllUserRentByRent(data, token) {
     });
 }
 
-async function isUserRentExistByScooterId(data, token) {
-    return await fetch("/admin/isUserRentExistByScooterId",{
+async function isUserRentExistByDeviceId(data, token) {
+    return await fetch("/admin/isUserRentExistByDeviceId",{
         method :'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -82,8 +82,8 @@ async function createUserRent(data, token) {
 
     });
 }
-async function getAllUserRentByScooterExpirationDateLessThan(data, token) {
-    return await fetch("/admin/getAllByScooterExpirationDateLessThan",{
+async function getAllUserRentByDeviceExpirationDateLessThan(data, token) {
+    return await fetch("/admin/getAllByDeviceExpirationDateLessThan",{
         method :'POST',
         headers: {
             'Authorization': `Bearer ${token}`,

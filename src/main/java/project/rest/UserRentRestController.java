@@ -9,7 +9,7 @@ import project.exception.RepositoryException;
 import project.exception.ServiceException;
 import project.models.RentForm;
 import project.repository.UserRentFormRepository;
-import project.service.ScooterService;
+import project.service.DeviceService;
 import project.service.UserRentFormService;
 import project.validator.RentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +26,21 @@ public class UserRentRestController {
     @Autowired
     private UserRentFormRepository rentFormRepository;
     @Autowired
-    private ScooterService ScooterService;
+    private DeviceService DeviceService;
     @Autowired
     private RentValidator rentValidator;
 
-    @PostMapping("/admin/getAllByScooterExpirationDateLessThan")
+    @PostMapping("/admin/getAllByDeviceExpirationDateLessThan")
     public ResponseEntity<?> getAllByComputerStuffExpirationDateLessThan(@RequestBody DateRequest dateRequest) throws ControllerException {
         try {
-            return new ResponseEntity<>(userRentFormService.getAllByScooterExpirationDateLessThan(dateRequest.getDate()), HttpStatus.FOUND);
+            return new ResponseEntity<>(userRentFormService.getAllByDeviceExpirationDateLessThan(dateRequest.getDate()), HttpStatus.FOUND);
         } catch (ServiceException e) {
             throw new ControllerException(e);
         }
 
     }
-    @DeleteMapping("/admin/deleteByUserIdAndScooterId")
-    public ResponseEntity<?> deleteByUserIdAndScooterId() {
+    @DeleteMapping("/admin/deleteByUserIdAndDeviceId")
+    public ResponseEntity<?> deleteByUserIdAndDeviceId() {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
@@ -72,10 +72,10 @@ public class UserRentRestController {
             throw new ControllerException(e);
         }
     }
-    @PostMapping("/admin/isUserRentExistByScooterId")
-    public ResponseEntity<?> isUserRentExistByScooterId(@RequestBody IdRequest idRequest) throws ControllerException{
+    @PostMapping("/admin/isUserRentExistByDeviceId")
+    public ResponseEntity<?> isUserRentExistByDeviceId(@RequestBody IdRequest idRequest) throws ControllerException{
         try {
-            if(userRentFormService.existsByScooterId(idRequest.getId())) {
+            if(userRentFormService.existsByDeviceId(idRequest.getId())) {
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -101,7 +101,7 @@ public class UserRentRestController {
                     userRentRequestNoId.getUser(),
                     userRentRequestNoId.getName(),
                     userRentRequestNoId.getSurname(),
-                    userRentRequestNoId.getScooter()
+                    userRentRequestNoId.getDevice()
             );
             try {
                 RentForm test = new RentForm();

@@ -1,7 +1,7 @@
 package project.repository;
 
 import project.exception.RepositoryException;
-import project.models.Scooter;
+import project.models.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,22 +9,22 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ScooterRepository extends JpaRepository<Scooter, Long> {
+public interface DeviceRepository extends JpaRepository<Device, Long> {
     @Modifying
     void deleteById(int id)throws RepositoryException;
 
     @Modifying
     void deleteByName(String name)throws RepositoryException;
 
-    Scooter getById(Long id);
+    Device getById(Long id);
 
-    Scooter getByName(String name)throws RepositoryException;
+    Device getByName(String name)throws RepositoryException;
 
     boolean existsByName(String name)throws RepositoryException;
 
     @Modifying
-    @Query("update Scooter c set c.name=:name, c.description=:description, c.cost=:cost where c.id=:id")
-    void updateScooterById(
+    @Query("update Device c set c.name=:name, c.description=:description, c.cost=:cost where c.id=:id")
+    void updateDeviceById(
             @Param("id") Long id,
             @Param("name") String name,
             @Param("description") String description,

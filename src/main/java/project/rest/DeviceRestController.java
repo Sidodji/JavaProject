@@ -1,14 +1,14 @@
 package project.rest;
 
 import project.dto.NameRequest;
-import project.dto.ScooterRequestNoIdRent;
-import project.dto.ScooterRequestNoRent;
+import project.dto.DeviceRequestNoIdRent;
+import project.dto.DeviceRequestNoRent;
 import project.exception.ControllerException;
 import project.exception.RepositoryException;
 import project.exception.ServiceException;
-import project.models.Scooter;
+import project.models.Device;
 import project.repository.UserRentFormRepository;
-import project.service.ScooterService;
+import project.service.DeviceService;
 import project.service.UserRentFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,47 +19,47 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @RestController
-public class ScooterRestController {
+public class DeviceRestController {
     @Autowired
-    private ScooterService scooterService;
+    private DeviceService deviceService;
     @Autowired
     private UserRentFormService userRentFormService;
     @Autowired
     private UserRentFormRepository userRentFormRepository;
-    @PostMapping("/admin/createScooter")
-    public ResponseEntity<?> createScooter(@RequestBody ScooterRequestNoIdRent scooterRequestNoIdRent) throws ControllerException {
-        Scooter stuff = new Scooter(
-                scooterRequestNoIdRent.getName(),
-                scooterRequestNoIdRent.getDescription(),
-                scooterRequestNoIdRent.getCost(),
-                scooterRequestNoIdRent.getExpirationDate()
+    @PostMapping("/admin/createDevice")
+    public ResponseEntity<?> createDevice(@RequestBody DeviceRequestNoIdRent deviceRequestNoIdRent) throws ControllerException {
+        Device stuff = new Device(
+                deviceRequestNoIdRent.getName(),
+                deviceRequestNoIdRent.getDescription(),
+                deviceRequestNoIdRent.getCost(),
+                deviceRequestNoIdRent.getExpirationDate()
         );
         try {
-            scooterService.create(stuff);
+            deviceService.create(stuff);
             return new ResponseEntity<>(stuff, HttpStatus.OK);
         } catch (ServiceException e) {
             throw new ControllerException(e);
         }
     }
-    @DeleteMapping("/admin/deleteScooterByNameA")
-    public ResponseEntity<?> deleteScooterByNameA(@RequestBody NameRequest nameRequest) throws ControllerException {
+    @DeleteMapping("/admin/deleteDeviceByNameA")
+    public ResponseEntity<?> deleteDeviceByNameA(@RequestBody NameRequest nameRequest) throws ControllerException {
         try {
-            Scooter man = scooterService.getByName(nameRequest.getName());
-            scooterService.deleteByName(nameRequest.getName());
+            Device man = deviceService.getByName(nameRequest.getName());
+            deviceService.deleteByName(nameRequest.getName());
             return new ResponseEntity<>(man, HttpStatus.OK);
         } catch (ServiceException e) {
             throw new ControllerException(e);
         }
     }
-    @PutMapping("/admin/updateScooter")
-    public ResponseEntity<?> updateScooter(@RequestBody ScooterRequestNoRent ScooterRequestNoRent)throws ControllerException {
+    @PutMapping("/admin/updateDevice")
+    public ResponseEntity<?> updateDevice(@RequestBody DeviceRequestNoRent DeviceRequestNoRent)throws ControllerException {
         try {
-            Scooter man = scooterService.getById( ScooterRequestNoRent.getId());
-            scooterService.updateScooterById(
-                    ScooterRequestNoRent.getId(),
-                    ScooterRequestNoRent.getName(),
-                    ScooterRequestNoRent.getDescription(),
-                    ScooterRequestNoRent.getCost()
+            Device man = deviceService.getById( DeviceRequestNoRent.getId());
+            deviceService.updateDeviceById(
+                    DeviceRequestNoRent.getId(),
+                    DeviceRequestNoRent.getName(),
+                    DeviceRequestNoRent.getDescription(),
+                    DeviceRequestNoRent.getCost()
             );
             return new ResponseEntity<>(man, HttpStatus.OK);
         } catch (ServiceException e) {
@@ -67,11 +67,11 @@ public class ScooterRestController {
 
         }
     }
-    @DeleteMapping("/user/deleteScooterByNameU")
-    public ResponseEntity<?> deleteScooterByNameU(@RequestBody NameRequest nameRequest)throws ControllerException {
+    @DeleteMapping("/user/deleteDeviceByNameU")
+    public ResponseEntity<?> deleteDeviceByNameU(@RequestBody NameRequest nameRequest)throws ControllerException {
 
         try {
-            Scooter man = scooterService.getByName(nameRequest.getName());
+            Device man = deviceService.getByName(nameRequest.getName());
             userRentFormRepository.deleteByUserName(nameRequest.getName());
             return new ResponseEntity<>(man, HttpStatus.OK);
         } catch (ServiceException | RepositoryException e ) {
@@ -84,17 +84,17 @@ public class ScooterRestController {
     @GetMapping("/admin/getAllCompsForAdmin")
     public ResponseEntity<?> getAllCompsForAdmin() throws ControllerException{
         try {
-            return new ResponseEntity<>(scooterService.getAll(),HttpStatus.OK);
+            return new ResponseEntity<>(deviceService.getAll(),HttpStatus.OK);
         } catch (ServiceException e) {
 
             throw new ControllerException(e);
 
         }
     }
-    @PostMapping("/admin/isScooterExistByName")
-    public ResponseEntity<?> isScooterExistByName(@RequestBody NameRequest nameRequest) throws ControllerException{
+    @PostMapping("/admin/isDeviceExistByName")
+    public ResponseEntity<?> isDeviceExistByName(@RequestBody NameRequest nameRequest) throws ControllerException{
         try {
-            if(!scooterService.existsByName(nameRequest.getName())){
+            if(!deviceService.existsByName(nameRequest.getName())){
                 return new ResponseEntity<>(HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.FOUND);
@@ -105,21 +105,21 @@ public class ScooterRestController {
         }
 
     }
-    @GetMapping("/user/userGetScooterByName/{name}")
-    public ResponseEntity<?> userGetScooterByName(@PathVariable(name = "name")String name)throws ControllerException {
-        Scooter stuff = null;
+    @GetMapping("/user/userGetDeviceByName/{name}")
+    public ResponseEntity<?> userGetDeviceByName(@PathVariable(name = "name")String name)throws ControllerException {
+        Device stuff = null;
         try {
-            stuff = scooterService.getByName(name);
+            stuff = deviceService.getByName(name);
             return new ResponseEntity<>(stuff,HttpStatus.OK);
         } catch (ServiceException e) {
             throw new ControllerException(e);
         }
     }
-    @GetMapping("admin/adminGetScooterByName/{name}")
-    public ResponseEntity<?> adminGetScooterByName(@PathVariable(name = "name")String name) throws ParseException, ControllerException {
-        Scooter stuff = null;
+    @GetMapping("admin/adminGetDeviceByName/{name}")
+    public ResponseEntity<?> adminGetDeviceByName(@PathVariable(name = "name")String name) throws ParseException, ControllerException {
+        Device stuff = null;
         try {
-            stuff = scooterService.getByName(name);
+            stuff = deviceService.getByName(name);
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
@@ -136,7 +136,7 @@ public class ScooterRestController {
     @GetMapping("/user/getAllCompsForUser")
     public ResponseEntity<?> getAllCompsForUser()throws ControllerException {
         try {
-            return new ResponseEntity<>(scooterService.getAll(),HttpStatus.OK);
+            return new ResponseEntity<>(deviceService.getAll(),HttpStatus.OK);
         } catch (ServiceException e) {
             throw new ControllerException(e);
 

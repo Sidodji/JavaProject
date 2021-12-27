@@ -2,47 +2,47 @@ package project.service;
 
 import project.exception.RepositoryException;
 import project.exception.ServiceException;
-import project.models.Scooter;
-import project.repository.ScooterRepository;
-import project.service.interfaces.IScooterService;
+import project.models.Device;
+import project.repository.DeviceRepository;
+import project.service.interfaces.IDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ScooterService implements IScooterService{
+public class DeviceService implements IDeviceService{
     @Autowired
-    private ScooterRepository scooterRepository;
+    private DeviceRepository deviceRepository;
 
     @Override
     public void deleteById(Long id) {
-        scooterRepository.deleteById(id);
+        deviceRepository.deleteById(id);
     }
 
     @Override
-    public Scooter create(Scooter Scooter)throws ServiceException {
-        return scooterRepository.save(Scooter);
+    public Device create(Device Device)throws ServiceException {
+        return deviceRepository.save(Device);
     }
 
     @Override
     public boolean existsByName(String name) throws ServiceException {
         try {
-            return scooterRepository.existsByName(name);
+            return deviceRepository.existsByName(name);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
         }
     }
 
     @Override
-    public List<Scooter> getAll()throws ServiceException {
-        return scooterRepository.findAll();
+    public List<Device> getAll()throws ServiceException {
+        return deviceRepository.findAll();
     }
 
     @Override
     public void deleteByName(String name)throws ServiceException {
         try {
-            scooterRepository.deleteByName(name);
+            deviceRepository.deleteByName(name);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
 
@@ -50,9 +50,9 @@ public class ScooterService implements IScooterService{
     }
 
     @Override
-    public Scooter getById(Long id)throws ServiceException {
+    public Device getById(Long id)throws ServiceException {
         try {
-            return scooterRepository.getById(id);
+            return deviceRepository.getById(id);
         } catch (Exception e) {
             throw new ServiceException(e);
 
@@ -60,9 +60,9 @@ public class ScooterService implements IScooterService{
     }
 
     @Override
-    public Scooter getByName(String name)throws ServiceException {
+    public Device getByName(String name)throws ServiceException {
         try {
-            return scooterRepository.getByName(name);
+            return deviceRepository.getByName(name);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
 
@@ -70,9 +70,9 @@ public class ScooterService implements IScooterService{
     }
 
     @Override
-    public void updateScooterById(Long id, String name, String description, int cost ) throws ServiceException{
+    public void updateDeviceById(Long id, String name, String description, int cost ) throws ServiceException{
         try {
-            scooterRepository.updateScooterById(id, name, description, cost);
+            deviceRepository.updateDeviceById(id, name, description, cost);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
 

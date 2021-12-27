@@ -28,18 +28,18 @@ public class RentForm {
     private String userSurname;
 
     @ManyToOne
-    @JoinColumn(name = "scooter_id")
-    private Scooter scooter;
+    @JoinColumn(name = "device_id")
+    private Device device;
 
     @Column
     private boolean rent;
 
     public RentForm(){}
-    public RentForm(User user, String userName, String userSurname, Scooter scooter)
+    public RentForm(User user, String userName, String userSurname, Device device)
     {
         this.user = user;
         this.userName = userName;
         this.userSurname = userSurname;
-        this.scooter = scooter;
+        this.device = device;
     }
 }

@@ -1,16 +1,5 @@
-async function deleteScooterByNameA(data, token) {
-    return await fetch("/admin/deleteScooterByNameA", {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(data)
-
-    });
-}
-async function deleteScooterByNameU(data, token) {
-    return await fetch("/user/deleteScooterByNameU", {
+async function deleteDeviceByNameA(data, token) {
+    return await fetch("/admin/deleteDeviceByNameA", {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -21,8 +10,20 @@ async function deleteScooterByNameU(data, token) {
     });
 }
 
-async function updateScooter(data, token) {
-    return await fetch("/admin/updateScooter", {
+async function deleteDeviceByNameU(data, token) {
+    return await fetch("/user/deleteDeviceByNameU", {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+
+    });
+}
+
+async function updateDevice(data, token) {
+    return await fetch("/admin/updateDevice", {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -33,8 +34,8 @@ async function updateScooter(data, token) {
     });
 }
 
-async function userGetScooterByName(name, token) {
-    return await fetch(`/user/userGetScooterByName/${name}`, {
+async function userGetDeviceByName(name, token) {
+    return await fetch(`/user/userGetDeviceByName/${name}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -48,8 +49,8 @@ async function userGetScooterByName(name, token) {
     });
 }
 
-async function adminGetScooterByName(name, token) {
-    return await fetch(`/admin/adminGetScooterByName/${name}`, {
+async function adminGetDeviceByName(name, token) {
+    return await fetch(`/admin/adminGetDeviceByName/${name}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -62,8 +63,8 @@ async function adminGetScooterByName(name, token) {
         return data;
     });
 }
-async function isScooterExistByName(data, token) {
-    return await fetch("/admin/isScooterExistByName",{
+async function isDeviceExistByName(data, token) {
+    return await fetch("/admin/isDeviceExistByName",{
         method :'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -73,8 +74,8 @@ async function isScooterExistByName(data, token) {
 
     });
 }
-async function createScooter(data, token) {
-    return await fetch("/admin/createScooter",{
+async function createDevice(data, token) {
+    return await fetch("/admin/createDevice",{
         method :'POST',
         headers: {
             'Authorization': `Bearer ${token}`,

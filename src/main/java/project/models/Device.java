@@ -9,11 +9,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "scooter")
+@Table(name = "device")
 @Data
 @Getter
 @Setter
-public class Scooter {
+public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,9 +30,9 @@ public class Scooter {
     @Column
     private int cost;
 
-    public Scooter(){}
+    public Device(){}
 
-    public Scooter(String name, String description, int cost, Date date)
+    public Device(String name, String description, int cost, Date date)
     {
         this.name = name;
         this.description = description;

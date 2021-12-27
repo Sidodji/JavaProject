@@ -51,7 +51,7 @@ async function genListOfCompStuffForAdmin() {
 async function getCertainComp(softObj) {
     console.log(softObj);
     let token = localStorage.getItem('token');
-    let soft = await adminGetScooterByName(softObj['name'], token);
+    let soft = await adminGetDeviceByName(softObj['name'], token);
 
     document.getElementById('name').value = soft['name'];
     document.getElementById('description').value = soft['description'];
@@ -71,11 +71,11 @@ async function genAdminCreateButton() {
     let cost = document.getElementById('cost').value;
     let expirationDate = document.getElementById('date').value;
 
-    let isNotExist = await isScooterExistByName({name: name}, token);
+    let isNotExist = await isDeviceExistByName({name: name}, token);
     let errMes = document.getElementById('errMes');
 
 
-    if (validateScooter() && await isAuth() && isNotExist.ok) {
+    if (validateDevice() && await isAuth() && isNotExist.ok) {
         let name = document.getElementById('name').value;
 
 
@@ -85,7 +85,7 @@ async function genAdminCreateButton() {
             cost: cost,
             expirationDate: expirationDate
         };
-        await createScooter(data, token);
+        await createDevice(data, token);
         console.log(data);
         errMes.innerHTML = 'Created';
         await genListOfCompStuffForAdmin();
@@ -98,13 +98,13 @@ async function genAdminDeleteButton() {
     let errMes = document.getElementById('errMes');
     let token = localStorage.getItem('token');
     let name = document.getElementById('name').value;
-    let isNotExist = await isScooterExistByName({name: name}, token);
+    let isNotExist = await isDeviceExistByName({name: name}, token);
     if (await isAuth() && !isNotExist.ok) {
 
-        let project = await adminGetScooterByName(name, token);
-        let isNotExist = await isUserRentExistByScooterId({id: project['id']}, token);
+        let project = await adminGetDeviceByName(name, token);
+        let isNotExist = await isUserRentExistByDeviceId({id: project['id']}, token);
         if (!isNotExist.ok) {
-            await deleteScooterByNameA({name: name}, token);
+            await deleteDeviceByNameA({name: name}, token);
             errMes.innerHTML = 'deleted';
             await genListOfCompStuffForAdmin();
 
@@ -117,7 +117,7 @@ async function genAdminDeleteButton() {
     }
 }
 
-function validateScooter() {
+function validateDevice() {
     let nameL = document.getElementById('name').value.length;
     let descriptionL = document.getElementById('description').value.length;
     let cost = document.getElementById('cost').value;
@@ -151,13 +151,13 @@ async function genAdminUpdateButton() {
     let description = document.getElementById('description').value;
     let cost = document.getElementById('cost').value;
     let expirationDate = document.getElementById('date').value;
-    let isNotExist = await isScooterExistByName({name: name}, token);
+    let isNotExist = await isDeviceExistByName({name: name}, token);
     if (await isAuth() && !isNotExist.ok) {
 
-        let res = await adminGetScooterByName(name, token);
+        let res = await adminGetDeviceByName(name, token);
 
-        if (validateScooter()) {
-            await updateScooter({
+        if (validateDevice()) {
+            await updateDevice({
                 id: res['id'],
                 name: name,
                 description: description,
@@ -184,7 +184,7 @@ async function genAdminUpdate() {
 
 async function genAdminInfo() {
     let token = localStorage.getItem('token');
-    let usersRent = await getAllUserRentByScooterExpirationDateLessThan({date: new Date()}, token);
+    let usersRent = await getAllUserRentByDeviceExpirationDateLessThan({date: new Date()}, token);
 
     console.log(usersRent);
     let info = document.querySelector('.neededInfo');
@@ -201,7 +201,7 @@ async function genAdminInfo() {
             let th2 = document.createElement('th');
             th2.innerHTML = 'user surname';
             let th3 = document.createElement('th');
-            th3.innerHTML = 'scooter name';
+            th3.innerHTML = 'device name';
             let th4 = document.createElement('th');
             th4.innerHTML = 'expiration date';
             let th5 = document.createElement('th');
@@ -219,7 +219,7 @@ async function genAdminInfo() {
             let tr = document.createElement('tr');
             for (let y = 0; y < 7; y++) {
                 let th = document.createElement('th');
-                let Scooter = usersRent[i]['scooter'];
+                let Device = usersRent[i]['device'];
                 console.log(usersRent[i]['userName']);
                 switch (y) {
                     case 0: {
@@ -231,11 +231,11 @@ async function genAdminInfo() {
                         break;
                     }
                     case 2: {
-                        th.innerHTML = Scooter['name'];
+                        th.innerHTML = Device['name'];
                         break;
                     }
                     case 3: {
-                        th.innerHTML = Scooter['expirationDate'];
+                        th.innerHTML = Device['expirationDate'];
                         break;
                     }
                     case 4: {

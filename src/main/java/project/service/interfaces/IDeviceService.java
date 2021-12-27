@@ -1,6 +1,6 @@
 package project.service.interfaces;
 
-import project.models.Scooter;
+import project.models.Device;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,24 +8,24 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public interface IScooterService {
+public interface IDeviceService {
     @Transactional
     void deleteById(Long id) throws ServiceException;
 
-    Scooter create(Scooter computerStuff)throws ServiceException, project.exception.ServiceException;
+    Device create(Device computerStuff)throws ServiceException, project.exception.ServiceException;
 
     boolean existsByName(String name) throws ServiceException, project.exception.ServiceException;
 
-    List<Scooter> getAll()throws ServiceException, project.exception.ServiceException;
+    List<Device> getAll()throws ServiceException, project.exception.ServiceException;
     @Transactional
     void deleteByName(String name)throws ServiceException, project.exception.ServiceException;
 
-    Scooter getById(Long id)throws ServiceException, project.exception.ServiceException;
+    Device getById(Long id)throws ServiceException, project.exception.ServiceException;
 
-    Scooter getByName(String name)throws ServiceException, project.exception.ServiceException;
+    Device getByName(String name)throws ServiceException, project.exception.ServiceException;
 
     @Transactional
-    void updateScooterById(
+    void updateDeviceById(
             Long id,
             String name,
             String description,
