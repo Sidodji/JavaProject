@@ -1,6 +1,6 @@
 async function genUserSearchButton() {
     let token = localStorage.getItem('token');
-    let inputResult = document.getElementById('searchPatientCard').value;
+    let inputResult = document.getElementById('searchPatientDeviced').value;
     if(inputResult.length===0){
         await genListOfCompStuffForUser();
     }else{
@@ -28,9 +28,9 @@ async function userSearch() {
 
     let search = document.querySelector('.search');
     let searchButton = button(await genUserSearchButton, 'Search');
-    let searchPatientCard = input('text','searchPatientCard','computer name');
+    let searchPatientDeviced = input('text','searchPatientDeviced','device name');
     searchButton.id = 'docCreateButton';
-    search.appendChild(searchPatientCard);
+    search.appendChild(searchPatientDeviced);
     search.appendChild(searchButton);
 }
 async function load() {

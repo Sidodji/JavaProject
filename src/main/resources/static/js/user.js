@@ -1,4 +1,4 @@
-async function genCard() {
+async function genDeviced() {
     let token = localStorage.getItem('token');
     let info = document.querySelector(".personalInfo");
     info.innerHTML='';
@@ -6,7 +6,7 @@ async function genCard() {
 
     let name = input('text', 'name', 'Name', '');
 
-    let surname = input('text', 'surname', 'Surname', 'surnameValue');
+    let surname = input('text', 'surname', 'Surname', '');
 
 
     info.appendChild(name);
@@ -14,7 +14,7 @@ async function genCard() {
 
 }
 
-function validateCard() {
+function validateDeviced() {
     let nameL = document.getElementById('name').value.length;
     let surnameL = document.getElementById('surname').value.length;
 
@@ -38,7 +38,7 @@ async function genUserCreateButton(user , Device) {
     let isNotExist = await isUserRentExistByUserId({id: userTextData['id']}, token);
     let errMes = document.getElementById('errMes');
 
-    if (validateCard() && await isAuth() && isNotExist.ok) {
+    if (validateDeviced() && await isAuth() && isNotExist.ok) {
         let name = document.getElementById('name').value;
         let surname = document.getElementById('surname').value;
 
@@ -58,7 +58,7 @@ async function genUserCreateButton(user , Device) {
 
 }
 
-async function genCardCreate(user, comp) {
+async function genDevicedCreate(user, comp) {
     let create = document.querySelector('.create');
     create.innerHTML='';
     let createButton = buttonWithParams('Create');
@@ -77,8 +77,8 @@ async function getCertainCompUser(listProjectElement) {
 
     let comp = await userGetDeviceByName(listProjectElement['name'], token);
 
-    await genCard();
-    await genCardCreate(user,comp);
+    await genDeviced();
+    await genDevicedCreate(user,comp);
 }
 
 async function genListOfCompStuffForUser() {
