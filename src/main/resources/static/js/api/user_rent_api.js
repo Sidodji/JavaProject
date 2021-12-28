@@ -1,5 +1,5 @@
-async function deleteByUserIdAndComputerStuffId(data,token) {
-    return await fetch("/admin/deleteByUserIdAndComputerStuffId",{
+async function deleteByUserIdAndDeviceStuffId(data,token) {
+    return await fetch("/admin/deleteByUserIdAndDeviceStuffId",{
         method :'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,

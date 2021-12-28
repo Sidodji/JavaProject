@@ -12,7 +12,7 @@ public interface IDeviceService {
     @Transactional
     void deleteById(Long id) throws ServiceException;
 
-    Device create(Device computerStuff)throws ServiceException, project.exception.ServiceException;
+    Device create(Device deviceStuff)throws ServiceException, project.exception.ServiceException;
 
     boolean existsByName(String name) throws ServiceException, project.exception.ServiceException;
 

@@ -11,16 +11,16 @@ public interface IUserRentFormService {
     @Transactional
     void deleteById(Long id)throws ServiceException;
     @Transactional
-    void deleteByUserIdAndDeviceId(Long user_id, Long computerStuff_id) throws ServiceException, project.exception.ServiceException;
+    void deleteByUserIdAndDeviceId(Long user_id, Long deviceStuff_id) throws ServiceException, project.exception.ServiceException;
 
     RentForm create(RentForm userRentForm)throws ServiceException, project.exception.ServiceException;
-    boolean existsByDeviceId(Long computerStuff_id) throws ServiceException, project.exception.ServiceException;
+    boolean existsByDeviceId(Long deviceStuff_id) throws ServiceException, project.exception.ServiceException;
     RentForm getById(Long id)throws ServiceException, project.exception.ServiceException;
 
     List<RentForm> getAllByUserId(Long user_id)throws ServiceException, project.exception.ServiceException;
     List<RentForm> getAllByRent(boolean rent)throws ServiceException, project.exception.ServiceException;
 
-    List<RentForm> getAllByDeviceExpirationDateLessThan(Date computerStuff_expirationDate)throws ServiceException, project.exception.ServiceException;
+    List<RentForm> getAllByDeviceExpirationDateLessThan(Date deviceStuff_expirationDate)throws ServiceException, project.exception.ServiceException;
     @Transactional
     void setUserRentFormById(Long id, boolean rent)throws ServiceException, project.exception.ServiceException;
 }

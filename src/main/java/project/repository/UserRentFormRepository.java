@@ -18,17 +18,17 @@ public interface UserRentFormRepository extends JpaRepository<RentForm, Long> {
     @Modifying
     void deleteById(Long id);
     @Modifying
-    void deleteByUserIdAndDeviceId(Long user_id, Long computerStuff_id)throws RepositoryException;
+    void deleteByUserIdAndDeviceId(Long user_id, Long deviceStuff_id)throws RepositoryException;
     @Modifying
     @Transactional
     void deleteByUserName(String userName)throws RepositoryException;
 
     RentForm getById(Long id);
     List<RentForm> getAllByUserId(Long user_id)throws RepositoryException;
-    boolean existsByDeviceId(Long computerStuff_id)throws RepositoryException;
+    boolean existsByDeviceId(Long deviceStuff_id)throws RepositoryException;
     boolean existsByUserId(Long user_id)throws RepositoryException;
     List<RentForm> getAllByRent(boolean rent)throws RepositoryException;
-    List<RentForm> getAllByDeviceExpirationDateLessThan(Date computerStuff_expirationDate)throws RepositoryException;
+    List<RentForm> getAllByDeviceExpirationDateLessThan(Date deviceStuff_expirationDate)throws RepositoryException;
     @Modifying
     @Query("update RentForm urf set urf.rent =:rent  where urf.id =:id ")
     void setUserRentFormById(@Param("id") Long id, @Param("rent") boolean rent)throws RepositoryException, ServiceException;

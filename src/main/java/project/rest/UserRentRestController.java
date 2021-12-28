@@ -31,7 +31,7 @@ public class UserRentRestController {
     private RentValidator rentValidator;
 
     @PostMapping("/admin/getAllByDeviceExpirationDateLessThan")
-    public ResponseEntity<?> getAllByComputerStuffExpirationDateLessThan(@RequestBody DateRequest dateRequest) throws ControllerException {
+    public ResponseEntity<?> getAllByDeviceStuffExpirationDateLessThan(@RequestBody DateRequest dateRequest) throws ControllerException {
         try {
             return new ResponseEntity<>(userRentFormService.getAllByDeviceExpirationDateLessThan(dateRequest.getDate()), HttpStatus.FOUND);
         } catch (ServiceException e) {

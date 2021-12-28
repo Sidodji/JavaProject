@@ -21,9 +21,9 @@ public class UserRentFormService implements IUserRentFormService {
     }
 
     @Override
-    public void deleteByUserIdAndDeviceId(Long user_id, Long computerStuff_id) throws ServiceException {
+    public void deleteByUserIdAndDeviceId(Long user_id, Long deviceStuff_id) throws ServiceException {
         try {
-            userRentFormRepository.deleteByUserIdAndDeviceId(user_id, computerStuff_id);
+            userRentFormRepository.deleteByUserIdAndDeviceId(user_id, deviceStuff_id);
         } catch (RepositoryException e) {
 
             throw new ServiceException(e);
@@ -36,9 +36,9 @@ public class UserRentFormService implements IUserRentFormService {
     }
 
     @Override
-    public boolean existsByDeviceId(Long computerStuff_id) throws ServiceException {
+    public boolean existsByDeviceId(Long deviceStuff_id) throws ServiceException {
         try {
-            return userRentFormRepository.existsByDeviceId(computerStuff_id);
+            return userRentFormRepository.existsByDeviceId(deviceStuff_id);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
 
@@ -71,9 +71,9 @@ public class UserRentFormService implements IUserRentFormService {
     }
 
     @Override
-    public List<RentForm> getAllByDeviceExpirationDateLessThan(Date computerStuff_expirationDate) throws ServiceException{
+    public List<RentForm> getAllByDeviceExpirationDateLessThan(Date deviceStuff_expirationDate) throws ServiceException{
         try {
-            return userRentFormRepository.getAllByDeviceExpirationDateLessThan(computerStuff_expirationDate);
+            return userRentFormRepository.getAllByDeviceExpirationDateLessThan(deviceStuff_expirationDate);
         } catch (RepositoryException e) {
             throw new ServiceException(e);
 
