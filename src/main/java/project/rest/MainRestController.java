@@ -1,6 +1,9 @@
 package project.rest;
 
 
+
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 import project.dto.AuthRequest;
 import project.dto.AuthResponse;
 import project.dto.RegistrationRequest;
@@ -15,7 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class MainRestController {
@@ -81,6 +86,7 @@ public class MainRestController {
             return new ResponseEntity<>(HttpStatus.FOUND);
         }
     }
+
     @PostMapping("/authorized")
     public ResponseEntity<?> isAuthorized() throws ControllerException {
         return new ResponseEntity<>(HttpStatus.OK);

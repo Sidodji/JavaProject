@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
+//класс для манипуляии с токеном
 @Component
 @Log
 public class JwtProvider {
